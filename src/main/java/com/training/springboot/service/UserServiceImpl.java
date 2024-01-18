@@ -70,5 +70,32 @@ public class UserServiceImpl implements UserService {
 		return repository.findByFirstName(firstName);
 		
 	}
+
+
+	@Override
+	public String deleteUserById(int id) {
+		
+		 repository.deleteById(id);
+		 
+		 return "deleted" + id;
+		 
+	}
+
+
+//	@Override
+//	public void deleteUserById(int id) {
+//		Optional<User> oldUser= repository.findById(id);
+//		
+//		if (oldUser.isPresent()) {
+//			User userObj = oldUser.get();
+//			repository.delete(userObj);
+//		}
+//		
+//		else {
+//			System.out.println("No data found");
+//		}
+//		
+//		
+//	}
 	
 }

@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -30,7 +31,8 @@ public class HomeController {
 		return "Hi there!!!!";
 	}
 	
-	//ADDDING USER
+	//************* LIST USER ********************
+	
 	@GetMapping("/users")
 	public ResponseEntity<List<User>> users(){
 //		List<User> userList = new ArrayList<User>();
@@ -43,13 +45,16 @@ public class HomeController {
 		
 	}
 	
+	//************* ADD USER ***********************
+	
 	@PostMapping("/user")
 	public ResponseEntity<User> addUser(@RequestBody User user){
-	User newUser= service.addUser(user);
-	return new ResponseEntity<>(newUser,HttpStatus.CREATED);
+	
+		User newUser= service.addUser(user);
+		return new ResponseEntity<>(newUser,HttpStatus.CREATED);
 	}
 	
-	//GETTING USER BY ID
+	//*************** GETTING USER BY ID *********************
 	
 	@GetMapping("/user/{id}")
 	public ResponseEntity<User> getUserById(@PathVariable("id") int id){
@@ -58,16 +63,33 @@ public class HomeController {
 
 	}
 	
+	//***********  UPDATE USER BY ID   **************
+	
 	@PutMapping("/user/{id}")
 	public ResponseEntity updateUser(@PathVariable("id") int id,@RequestBody User user) {
+		
 		service.updateUser(id, user);
 		return new ResponseEntity(HttpStatus.OK);
 		
 	}
 	
+	
+	//************** GET USER BY NAME ****************
+	
 	@GetMapping("/user/byName/{firstName}")
+	
 	public ResponseEntity<User> getUserByName(@PathVariable("firstName") String firstName){
+		
 		return new ResponseEntity<>(service.getUserByFirstName(firstName),HttpStatus.FOUND);
 		
+	}
+	
+	//************* DELET USER BY ID **************
+	
+	@DeleteMapping("/user/deleteUser/{id}")
+	public String deleteUserById(@PathVariable("id") int id){
+		
+		return service.deleteUserById(id);
+
 	}
 }

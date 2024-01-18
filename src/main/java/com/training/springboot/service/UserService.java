@@ -17,5 +17,7 @@ public interface UserService {
 	void updateUser(int id,User user);
 	
 	User getUserByFirstName(String firstName);
+	
+	String deleteUserById(int id);
 
 }

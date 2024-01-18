@@ -85,11 +85,14 @@ public class HomeController {
 	}
 	
 	//************* DELET USER BY ID **************
+
 	
 	@DeleteMapping("/user/deleteUser/{id}")
-	public String deleteUserById(@PathVariable("id") int id){
+	public ResponseEntity<String> deleteUserById(@PathVariable("id") int id){
 		
-		return service.deleteUserById(id);
-
+		return new ResponseEntity<>(service.deleteUserById(id),HttpStatus.FOUND);
+		
 	}
+
+	
 }
